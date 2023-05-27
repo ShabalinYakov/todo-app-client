@@ -1,0 +1,12 @@
+@import url('./_fonts.scss');
+@import url('./_reset.scss');
+@import url('./mixins/_mixins.scss');
+@import url('./vars/index.scss');
+@import url('./_globals.scss');
+
+body {
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
