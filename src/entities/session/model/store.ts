@@ -1,6 +1,9 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
-import { type Viewer, type AuthResponseError } from './types';
+import { type Viewer, type AuthResponseError, type AuthPayload } from './types';
+
+import { sessionApi } from '../api';
+import { localStorageSession } from '../lib';
 
 export class SessionStore {
   isAuthLoading = true;
@@ -27,4 +30,27 @@ export class SessionStore {
   setViewer(data: Viewer) {
     this.viewer = { ...data };
   }
+
+  removeError() {
+    this.error = {};
+  }
+
+  login = async ({ login, password }: AuthPayload) => {
+    try {
+      const { data } = await sessionApi.login({ login, password });
+
+      runInAction(() => {
+        if (data.error.code) return this.setError(data.error);
+
+        this.setAuth(true);
+        this.removeError();
+        this.setViewer(data.user);
+        localStorageSession.setToken(data.accessToken);
+      });
+    } catch (error: unknown) {
+      console.log(error);
+    } finally {
+      this.setAuthLoading(false);
+    }
+  };
 }
