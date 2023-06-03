@@ -14,7 +14,7 @@ const removeSessionData = () => {
   localStorage.removeItem(VIEWER_DATA);
 };
 
-export const localStorageViewer = {
+export const localStorageSession = {
   setToken,
   getToken,
   removeSessionData,
