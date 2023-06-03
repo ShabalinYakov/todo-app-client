@@ -4,7 +4,7 @@ import Routing from 'pages';
 
 import './App.scss';
 
-const _App = (): JSX.Element => {
+const _App = () => {
   return <Routing />;
 };
 
