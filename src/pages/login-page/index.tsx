@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 
-const _LoginPage = (): JSX.Element => {
+const _LoginPage = () => {
   return (
     <>
       <h1>Страница входа</h1>
