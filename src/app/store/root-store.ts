@@ -1,3 +1,5 @@
+import { SessionStore } from 'entities/session';
+
 export class RootStore {
-  test = 'test';
+  viewerStore = new SessionStore();
 }
