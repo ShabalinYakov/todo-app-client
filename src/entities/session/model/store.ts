@@ -35,6 +35,10 @@ export class SessionStore {
     this.error = {};
   }
 
+  get getError() {
+    return this.error;
+  }
+
   login = async ({ login, password }: AuthPayload) => {
     try {
       const { data } = await sessionApi.login({ login, password });
