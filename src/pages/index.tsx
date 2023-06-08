@@ -1,12 +1,16 @@
 import { observer } from 'mobx-react-lite';
 import { useRoutes } from 'react-router-dom';
 
-const _Routing = (): React.ReactElement<any, string | React.JSXElementConstructor<any>> | null => {
+import { LoginPage } from './login-page';
+import { TasksPage } from './tasks-page/tasks-page';
+
+import { Logout } from 'features/logout';
+
+const _Routing = () => {
   const elements = useRoutes([
-    {
-      path: '/',
-      element: <h1>Initial</h1>,
-    },
+    { path: '/', element: <TasksPage /> },
+    { path: '/login', element: <LoginPage /> },
+    { path: '/logout', element: <Logout /> },
   ]);
   return elements;
 };

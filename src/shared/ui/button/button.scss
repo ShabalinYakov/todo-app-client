@@ -1,0 +1,38 @@
+@use '../styles/vars/colors' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px 32px;
+
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  color: $button-text;
+
+  border: none;
+
+  border-radius: 10px;
+  background-color: $button-bg;
+
+  font-size: 16px;
+
+  &:hover {
+    background-color: $button-bg-hover;
+    box-shadow: 0 0 0 4px $button-shadow-hover;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    color: black;
+    background-color: $button-disable;
+
+    &:hover {
+      background-color: $button-disable;
+      box-shadow: none;
+    }
+  }
+}

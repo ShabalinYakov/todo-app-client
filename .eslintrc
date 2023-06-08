@@ -25,10 +25,10 @@
     "plugin:import/warnings",
     "plugin:import/typescript",
     "plugin:boundaries/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "plugin:promise/recommended",
     "plugin:react/recommended",
-    "standard-with-typescript",
     "prettier"
   ],
 
