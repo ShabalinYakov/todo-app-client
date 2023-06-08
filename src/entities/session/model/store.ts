@@ -57,4 +57,21 @@ export class SessionStore {
       this.setAuthLoading(false);
     }
   };
+
+  async checkAuth() {
+    const isToken = localStorageSession.getToken();
+    if (!isToken) return;
+
+    try {
+      const { data } = await sessionApi.refresh();
+
+      this.setAuth(true);
+      this.setViewer(data.user);
+      localStorageSession.setToken(data.accessToken);
+    } catch (error) {
+      console.log('login error');
+    } finally {
+      this.setAuthLoading(false);
+    }
+  }
 }
