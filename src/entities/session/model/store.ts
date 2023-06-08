@@ -64,10 +64,11 @@ export class SessionStore {
 
     try {
       const { data } = await sessionApi.refresh();
-
-      this.setAuth(true);
-      this.setViewer(data.user);
-      localStorageSession.setToken(data.accessToken);
+      runInAction(() => {
+        this.setAuth(true);
+        this.setViewer(data.user);
+        localStorageSession.setToken(data.accessToken);
+      });
     } catch (error) {
       console.log('login error');
     } finally {
@@ -76,10 +77,10 @@ export class SessionStore {
   };
 
   logout = async () => {
+    this.setAuth(false);
+    localStorageSession.removeSessionData();
     try {
       await sessionApi.logout();
-      this.setAuth(false);
-      localStorageSession.removeSessionData();
     } catch (err) {
       console.log('logout error');
     }
