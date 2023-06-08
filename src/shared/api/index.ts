@@ -1,1 +1,1 @@
-export { api } from './instance';
+export { baseApi } from './base-api';
