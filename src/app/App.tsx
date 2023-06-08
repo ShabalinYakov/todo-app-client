@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { withProviders } from './providers';
 import './App.scss';
@@ -8,9 +9,12 @@ import Routing from 'pages';
 
 const _App = () => {
   const { sessionStore } = useStore();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    sessionStore.checkAuth();
+    if (!sessionStore.isAuth && pathname !== '/login' && pathname !== '/logout') {
+      sessionStore.checkAuth();
+    }
   });
 
   return <Routing />;
