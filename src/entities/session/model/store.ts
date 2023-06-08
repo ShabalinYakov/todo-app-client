@@ -58,7 +58,7 @@ export class SessionStore {
     }
   };
 
-  async checkAuth() {
+  checkAuth = async () => {
     const isToken = localStorageSession.getToken();
     if (!isToken) return;
 
@@ -73,7 +73,7 @@ export class SessionStore {
     } finally {
       this.setAuthLoading(false);
     }
-  }
+  };
 
   logout = async () => {
     try {
