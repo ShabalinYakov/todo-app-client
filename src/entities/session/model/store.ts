@@ -74,4 +74,14 @@ export class SessionStore {
       this.setAuthLoading(false);
     }
   }
+
+  logout = async () => {
+    try {
+      await sessionApi.logout();
+      this.setAuth(false);
+      localStorageSession.removeSessionData();
+    } catch (err) {
+      console.log('logout error');
+    }
+  };
 }
