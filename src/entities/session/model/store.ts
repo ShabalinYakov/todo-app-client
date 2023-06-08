@@ -60,7 +60,7 @@ export class SessionStore {
 
   checkAuth = async () => {
     const isToken = localStorageSession.getToken();
-    if (!isToken) return;
+    if (!isToken) return this.setAuthLoading(false);
 
     try {
       const { data } = await sessionApi.refresh();
