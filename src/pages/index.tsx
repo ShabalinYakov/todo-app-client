@@ -5,10 +5,18 @@ import { LoginPage } from './login-page';
 import { TasksPage } from './tasks-page/tasks-page';
 
 import { Logout } from 'features/logout';
+import { PrivateRoute } from 'features/private-route';
 
 const _Routing = () => {
   const elements = useRoutes([
-    { path: '/', element: <TasksPage /> },
+    {
+      path: '/',
+      element: (
+        <PrivateRoute>
+          <TasksPage />
+        </PrivateRoute>
+      ),
+    },
     { path: '/login', element: <LoginPage /> },
     { path: '/logout', element: <Logout /> },
   ]);
