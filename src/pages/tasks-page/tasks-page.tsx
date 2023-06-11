@@ -8,13 +8,14 @@ import { TasksList } from 'features/tasks-list';
 import './tasks-page.scss';
 
 const _TasksPage = () => {
-  const { tasksStore } = useStore();
+  const { tasksStore, prioritiesStore } = useStore();
 
   useEffect(() => {
     if (tasksStore.tasks.length === 0) {
       tasksStore.loadTasks();
+      prioritiesStore.loadPriorities();
     }
-  }, [tasksStore]);
+  }, [tasksStore, prioritiesStore]);
 
   return (
     <>
