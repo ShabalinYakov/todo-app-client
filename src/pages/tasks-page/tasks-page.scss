@@ -1,5 +1,17 @@
 .tasks-page {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+
   &__tasks-wrapper {
     display: flex;
+    flex-wrap: wrap;
+
+    > * {
+      width: calc(25% - 15px);
+      margin-bottom: 15px;
+      margin-left: 10px;
+    }
   }
 }
