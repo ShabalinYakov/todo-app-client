@@ -21,20 +21,6 @@ export class TasksStore {
     this.tasks = data;
   }
 
-  loadTasks = async () => {
-    this.setLoading(true);
-    try {
-      const tasks = await tasksApi.getTasks();
-      runInAction(() => {
-        this.setTasks(tasks);
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.setLoading(false);
-    }
-  };
-
   get tasksForToday() {
     const dayEnd = getEndOfDayInMs();
 
@@ -56,5 +42,23 @@ export class TasksStore {
     return this.tasks
       .filter((task) => Date.parse(task.deadline) > weekEnd)
       .sort((prevTask, nextTask) => Date.parse(prevTask.deadline) - Date.parse(nextTask.deadline));
+  }
+
+  loadTasks = async () => {
+    this.setLoading(true);
+    try {
+      const tasks = await tasksApi.getTasks();
+      runInAction(() => {
+        this.setTasks(tasks);
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setLoading(false);
+    }
+  };
+
+  getTaskById(id: string) {
+    return this.tasks.find((task) => task.id === id);
   }
 }
