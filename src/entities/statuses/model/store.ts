@@ -1,11 +1,12 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import { Priority } from '..';
-import { prioritiesApi } from '../api';
+import { type Status } from './types';
 
-export class PrioritiesStore {
+import { statusesApi } from '../api';
+
+export class StatusesStore {
   isLoading = false;
-  priorities: Priority[] = [];
+  statuses: Status[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -15,16 +16,16 @@ export class PrioritiesStore {
     this.isLoading = bool;
   }
 
-  setPriorities(data: Priority[]) {
-    this.priorities = data;
+  setStatuses(data: Status[]) {
+    this.statuses = data;
   }
 
-  loadPriorities = async () => {
+  loadStatuses = async () => {
     this.setLoading(true);
     try {
-      const priorities = await prioritiesApi.getPriorities();
+      const statuses = await statusesApi.getStatuses();
       runInAction(() => {
-        this.setPriorities(priorities);
+        this.setStatuses(statuses);
       });
     } catch (error) {
       console.log(error);
