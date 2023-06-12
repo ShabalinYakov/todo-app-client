@@ -3,6 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { Task } from './types';
 
 import { tasksApi } from '../api';
+import { getEndOfDayInMs, getEndOfWeekInMs } from '../lib/date-helpers';
 
 export class TasksStore {
   isLoading = false;
@@ -33,4 +34,27 @@ export class TasksStore {
       this.setLoading(false);
     }
   };
+
+  get tasksForToday() {
+    const dayEnd = getEndOfDayInMs();
+
+    return this.tasks
+      .filter((task) => Date.parse(task.deadline) < dayEnd)
+      .sort((prevTask, nextTask) => Date.parse(prevTask.deadline) - Date.parse(nextTask.deadline));
+  }
+
+  get tasksForWeek() {
+    const dayEnd = getEndOfDayInMs();
+    const weekEnd = getEndOfWeekInMs();
+    return this.tasks
+      .filter((task) => Date.parse(task.deadline) > dayEnd && Date.parse(task.deadline) < weekEnd)
+      .sort((prevTask, nextTask) => Date.parse(prevTask.deadline) - Date.parse(nextTask.deadline));
+  }
+
+  get tasksForFuture() {
+    const weekEnd = getEndOfWeekInMs();
+    return this.tasks
+      .filter((task) => Date.parse(task.deadline) > weekEnd)
+      .sort((prevTask, nextTask) => Date.parse(prevTask.deadline) - Date.parse(nextTask.deadline));
+  }
 }
