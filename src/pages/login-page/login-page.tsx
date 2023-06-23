@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 
-import { AuthRedirect } from 'features/auth-redirect';
-import { LoginForm } from 'features/login-form';
+import { AuthRedirect, LoginForm } from 'features/auth';
 import './login-page.scss';
 
 const _LoginPage = () => {
