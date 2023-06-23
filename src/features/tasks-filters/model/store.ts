@@ -1,10 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 
-import { Task } from './types';
+import { Task, FilterConfig } from './types';
 
 import { getEndOfDayInMs, getEndOfWeekInMs } from '../lib/date-helpers';
-
-import { FilterConfig } from 'entities/tasks';
 
 export class TasksFilterStore {
   tasks: Task[] = [];

@@ -16,7 +16,7 @@ const _TabsList = ({ active, filters, onActive }: TabsListProps) => {
       <Tabs>
         {filters.map((filter) => (
           <div key={filter.id} onClick={() => onActive(filter.id)}>
-            <Tab active={active === filter.id} title={filter.name} />
+            <Tab active={active === filter.id} value={filter.name} />
           </div>
         ))}
       </Tabs>

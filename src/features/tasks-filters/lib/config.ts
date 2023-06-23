@@ -1,4 +1,4 @@
-import { FilterConfig } from 'entities/tasks';
+import { FilterConfig } from '../model/types';
 
 export type Filter = {
   id: number;
