@@ -1,0 +1,85 @@
+.text-field {
+  &__input-container {
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 12px;
+
+    border: 1px solid #a3a1a1;
+    border-radius: 10px;
+    outline: none;
+
+    font-size: 16px;
+    appearance: none;
+
+    &:focus {
+      border: 1px solid black;
+    }
+
+    &_error {
+      transition: all 0.4s ease;
+
+      border: 1px solid red;
+
+      &:focus {
+        border: 1px solid red;
+      }
+    }
+  }
+
+  &__error-message {
+    position: absolute;
+    top: -5px;
+    right: 14px;
+
+    padding: 0 5px;
+
+    transition-delay: 0.9s;
+
+    color: red;
+    background: #fff;
+
+    font-size: 12px;
+  }
+
+  &__api-error {
+    position: absolute;
+    bottom: -18px;
+    left: 10px;
+
+    margin: 0 5px;
+
+    color: red;
+    background: #fff;
+
+    font-size: 13px;
+  }
+
+  &__password-icon-container {
+    position: absolute;
+    top: 25%;
+    right: 12px;
+
+    cursor: pointer;
+  }
+}
+
+@media (width >= 1601px) {
+  .text-field {
+    font-size: 25px;
+
+    &__input {
+      padding: 20px;
+
+      font-size: 22px;
+    }
+
+    &__error-message {
+      top: -10px;
+
+      font-size: 22px;
+    }
+  }
+}
