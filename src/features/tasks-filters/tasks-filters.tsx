@@ -2,12 +2,10 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 
 import { DEFAULT_FILTER, getFilterById, getFiltersList } from './lib/config';
-import { Task } from './model/types';
+import { Task, FilterConfig } from './model/types';
 import './tasks-filters.scss';
 
 import { useStore } from 'app';
-
-import { FilterConfig } from 'entities/tasks';
 
 import { Tab, Tabs } from 'shared/ui';
 
