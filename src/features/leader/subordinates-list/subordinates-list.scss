@@ -1,0 +1,18 @@
+.group-subordinates {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  &__nav {
+    display: flex;
+  }
+
+  &__tasks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    padding: 20px;
+  }
+}
