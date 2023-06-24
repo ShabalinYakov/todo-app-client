@@ -24,8 +24,11 @@ const _TasksFilters = ({ tasks }: Props) => {
 
   useEffect(() => {
     filtersStore.reset();
+  }, [filtersStore]);
+
+  useEffect(() => {
     filtersStore.setTasks(tasks);
-  }, [filtersStore, tasks]);
+  });
 
   return (
     <div className="tasks-filters">
