@@ -1,1 +1,1 @@
-export {LeaderLink} from './leader-link'
+export { LeaderLink } from './leader-link';
