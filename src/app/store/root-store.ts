@@ -13,7 +13,7 @@ export class RootStore {
   tasksStore = new TasksStore();
   prioritiesStore = new PrioritiesStore();
   statusesStore = new StatusesStore();
-  leaderStore: LeaderStore | undefined;
+  leaderStore!: LeaderStore;
 
   filtersStore = new TasksFilterStore();
 
