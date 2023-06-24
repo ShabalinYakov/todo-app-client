@@ -1,29 +1,27 @@
 import { observer } from 'mobx-react-lite';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 import { useStore } from 'app';
 
-import { TasksList } from 'features/tasks-list';
+import { LeaderLink } from 'features/leader';
+
+import { Button } from 'shared/ui';
 import './tasks-page.scss';
 
 const _TasksPage = () => {
-  const { tasksStore, prioritiesStore, statusesStore } = useStore();
-
-  useEffect(() => {
-    if (tasksStore.tasks.length === 0) {
-      tasksStore.loadTasks();
-      prioritiesStore.loadPriorities();
-      statusesStore.loadStatuses();
-    }
-  }, [tasksStore, prioritiesStore, statusesStore]);
+  const { sessionStore } = useStore();
 
   return (
     <>
-      <h1>Страница задач</h1>
-      <Link to="/logout">Logout</Link>
+      <div className="tasks-page__header">
+        <h1>Страница задач</h1>
+        <Link to="/logout">
+          <Button>Выйти</Button>
+        </Link>
+      </div>
+      {sessionStore.viewer.is_leader && <LeaderLink />}
       <div className="tasks-page__tasks-wrapper">
-        <TasksList tasks={tasksStore.tasks} isLoad={tasksStore.isLoading} />
+        <Outlet />
       </div>
     </>
   );
