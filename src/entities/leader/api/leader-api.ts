@@ -7,9 +7,9 @@ const getSubordinates = async (): Promise<Subordinate[]> => {
   return data;
 };
 
-const getTasksSubordinatesById = async (id: string): Promise<Task[]> => {
-  const { data } = await baseApi.get(`/leader/tasks-subordinates/${id}`);
+const getTasksSubordinateById = async (id: string): Promise<Task[]> => {
+  const { data } = await baseApi.get(`/leader/tasks-subordinate/${id}`);
   return data;
 };
 
-export const leaderApi = { getSubordinates, getTasksSubordinatesById };
+export const leaderApi = { getSubordinates, getTasksSubordinateById };

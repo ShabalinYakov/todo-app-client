@@ -17,12 +17,12 @@ export class LeaderStore {
     this.isLoading = bool;
   }
 
-  loadTasksSubordinatesById = async (id: string) => {
+  loadSubordinates = async () => {
     this.setLoading(true);
     try {
-      const tasksSubordinates = await leaderApi.getTasksSubordinatesById(id);
+      const subordinates = await leaderApi.getSubordinates();
       runInAction(() => {
-        this.tasksSubordinate = tasksSubordinates;
+        this.subordinates = subordinates;
       });
     } catch (error) {
       console.log(error);
@@ -31,12 +31,12 @@ export class LeaderStore {
     }
   };
 
-  loadSubordinates = async () => {
+  loadTasksSubordinateById = async (id: string) => {
     this.setLoading(true);
     try {
-      const subordinates = await leaderApi.getSubordinates();
+      const tasksSubordinates = await leaderApi.getTasksSubordinateById(id);
       runInAction(() => {
-        this.subordinates = subordinates;
+        this.tasksSubordinate = tasksSubordinates;
       });
     } catch (error) {
       console.log(error);
