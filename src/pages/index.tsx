@@ -1,13 +1,16 @@
 import { observer } from 'mobx-react-lite';
-import { useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 
 import { LoginPage } from './login-page';
-import { TasksPage } from './tasks-page/tasks-page';
+import { TasksPage, TasksViewer, TasksSubordinates } from './tasks-page';
 
-import { Logout } from 'features/logout';
-import { PrivateRoute } from 'features/private-route';
+import { useStore } from 'app';
+
+import { Logout, PrivateRoute } from 'features/auth';
 
 const _Routing = () => {
+  const { sessionStore } = useStore();
+  const isLeader = sessionStore.viewer.is_leader;
   const elements = useRoutes([
     {
       path: '/',
@@ -16,9 +19,20 @@ const _Routing = () => {
           <TasksPage />
         </PrivateRoute>
       ),
+      children: [
+        {
+          path: '',
+          element: <TasksViewer />,
+        },
+        {
+          path: '/tasks-subordinates',
+          element: isLeader ? <TasksSubordinates /> : <Navigate to={'/'} />,
+        },
+      ],
     },
     { path: '/login', element: <LoginPage /> },
     { path: '/logout', element: <Logout /> },
+    { path: '*', element: <Navigate to={'/login'} /> },
   ]);
   return elements;
 };
