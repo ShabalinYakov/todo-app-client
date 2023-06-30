@@ -21,7 +21,7 @@ const _NewTask = () => {
     <>
       <Button onClick={toggleActive}>Создать задачу</Button>
       <Popup active={active} handleClose={toggleActive}>
-        {isLeader ? <CreateTaskLeader onClose={toggleActive} /> : <CreateTaskViewer onClose={toggleActive} />}
+        {isLeader ? <CreateTaskLeader /> : <CreateTaskViewer onClose={toggleActive} />}
       </Popup>
     </>
   );
