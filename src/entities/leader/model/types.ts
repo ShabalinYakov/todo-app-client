@@ -5,13 +5,31 @@ export interface Task {
   status: string;
   priority: string;
   deadline: string;
-  creator: string;
-  responsible: string;
+  creator: Creator;
+  responsible: Responsible;
   created_at: string;
   updated_at: string;
 }
 
+export interface Creator {
+  id: string;
+  name: string;
+}
+
+export interface Responsible {
+  id: string;
+  name: string;
+}
+
 export interface Subordinate {
   id: string;
-  fullname: string;
+  name: string;
+}
+
+export interface ResponsiblePayload {
+  task_id: string;
+  responsible: string;
+}
+export interface ResponsibleResponse {
+  name: string;
 }

@@ -20,9 +20,9 @@ const _SubordinatesList = () => {
     <>
       <div className="group-subordinates">
         <Tabs>
-          {leaderStore.subordinates.map(({ id, fullname }) => (
+          {leaderStore.subordinates.map(({ id, name }) => (
             <div key={id} onClick={() => setActive(id)}>
-              <Tab active={active === id} value={fullname} />
+              <Tab active={active === id} value={name} />
             </div>
           ))}
         </Tabs>

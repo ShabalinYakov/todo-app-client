@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const loginFormValues = {
+export const loginFormConfig = {
   login: '',
   password: '',
 };

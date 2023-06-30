@@ -12,7 +12,9 @@ const _TasksViewer = () => {
   const { tasksStore, filtersStore } = useStore();
 
   useEffect(() => {
-    tasksStore.loadViewerTasks();
+    if (tasksStore.tasksViewer.length === 0) {
+      tasksStore.loadViewerTasks();
+    }
   }, [tasksStore]);
 
   if (tasksStore.isLoading) {

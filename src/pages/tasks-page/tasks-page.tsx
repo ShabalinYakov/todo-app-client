@@ -3,13 +3,17 @@ import { Link, Outlet } from 'react-router-dom';
 
 import { useStore } from 'app';
 
+import { NewTask } from 'widgets/new-task';
+
 import { LeaderLink } from 'features/leader';
 
 import { Button } from 'shared/ui';
+
 import './tasks-page.scss';
 
 const _TasksPage = () => {
   const { sessionStore } = useStore();
+  const isLeader = sessionStore.viewer.is_leader;
 
   return (
     <>
@@ -19,7 +23,11 @@ const _TasksPage = () => {
           <Button>Выйти</Button>
         </Link>
       </div>
-      {sessionStore.viewer.is_leader && <LeaderLink />}
+
+      <nav className="tasks-page__nav">
+        <NewTask />
+        {isLeader && <LeaderLink />}
+      </nav>
       <div className="tasks-page__tasks-wrapper">
         <Outlet />
       </div>

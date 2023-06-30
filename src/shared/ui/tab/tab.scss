@@ -16,7 +16,8 @@
 
   &_active {
     opacity: 1;
-    border-bottom: 2px solid $tab-border;
+    border-bottom: 2px solid $tab-active-border;
+    background-color: $tab-active-bg;
   }
 
   &:hover {

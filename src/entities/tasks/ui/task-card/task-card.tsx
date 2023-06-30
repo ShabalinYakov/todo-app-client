@@ -3,13 +3,17 @@ import { observer } from 'mobx-react-lite';
 import { Task } from 'entities/tasks';
 import './task-card.scss';
 
-interface TaskCardProps {
+interface Props {
   task: Task;
+  activatePopup: () => void;
+  selectTask: (task: Task) => void;
 }
 const titleColor = (status: string, deadline: string) => {
+  const currentDate = Date.now();
+
   if (status === 'выполнена') {
     return 'green';
-  } else if (Date.now() > Date.parse(deadline)) {
+  } else if ((status === 'к выполнению' || status === 'выполняется') && Date.parse(deadline) < currentDate) {
     return 'red';
   } else {
     return 'gray';
@@ -27,11 +31,14 @@ const color = (priority: string) => {
   }
 };
 
-const _TaskCard = ({ task }: TaskCardProps) => {
+const _TaskCard = ({ task, activatePopup, selectTask }: Props) => {
   const { title, priority, deadline, responsible, status } = task;
-
+  const handleClick = () => {
+    selectTask(task);
+    activatePopup();
+  };
   return (
-    <div className={`task-card task-card__shadow_${titleColor(status, deadline)}`}>
+    <div className={`task-card task-card__shadow_${titleColor(status, deadline)}`} onClick={handleClick}>
       <header className="task-card__header">
         <h4 className={`title_${titleColor(status, deadline)}`}>{title}</h4>
         <div>
@@ -48,7 +55,7 @@ const _TaskCard = ({ task }: TaskCardProps) => {
 
       <div className="item">
         <div className="item__label">Ответственный</div>
-        <div className="item__value">{responsible}</div>
+        <div className="item__value">{responsible.name}</div>
       </div>
 
       <div className="item">

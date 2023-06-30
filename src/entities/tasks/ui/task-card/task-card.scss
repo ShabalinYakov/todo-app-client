@@ -1,4 +1,4 @@
-@use '../../../../shared/ui/styles/vars/colors.scss' as *;
+@use 'shared/ui/styles/vars/colors.scss' as *;
 
 .task-card {
   display: flex;
@@ -8,6 +8,8 @@
 
   width: 280px;
   padding: 20px;
+
+  cursor: pointer;
 
   border-radius: 15px;
 

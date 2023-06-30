@@ -1,4 +1,4 @@
-import { Subordinate, Task } from '../model/types';
+import { ResponsiblePayload, ResponsibleResponse, Subordinate, Task } from '../model/types';
 
 import { baseApi } from 'shared/api';
 
@@ -8,8 +8,13 @@ const getSubordinates = async (): Promise<Subordinate[]> => {
 };
 
 const getTasksSubordinateById = async (id: string): Promise<Task[]> => {
-  const { data } = await baseApi.get(`/leader/tasks-subordinate/${id}`);
+  const { data } = await baseApi.get(`/tasks/subordinate/${id}`);
   return data;
 };
 
-export const leaderApi = { getSubordinates, getTasksSubordinateById };
+const updateResponsibleTask = async (payload: ResponsiblePayload): Promise<ResponsibleResponse> => {
+  const { data } = await baseApi.patch('/tasks/responsible', payload);
+  return data;
+};
+
+export const leaderApi = { getSubordinates, getTasksSubordinateById, updateResponsibleTask };

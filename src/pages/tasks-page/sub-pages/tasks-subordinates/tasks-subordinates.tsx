@@ -13,7 +13,9 @@ const _TasksSubordinates = () => {
   const { leaderStore, filtersStore } = useStore();
 
   useEffect(() => {
-    leaderStore.loadSubordinates();
+    if (leaderStore.subordinates.length === 0) {
+      leaderStore.loadSubordinates();
+    }
   }, [leaderStore]);
 
   if (leaderStore.subordinates.length === 0) {

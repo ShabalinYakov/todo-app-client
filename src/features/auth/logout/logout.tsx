@@ -5,9 +5,16 @@ import { Navigate } from 'react-router-dom';
 import { useStore } from 'app';
 
 const _Logout = () => {
-  const { sessionStore } = useStore();
+  const { sessionStore, leaderStore, tasksStore } = useStore();
 
   useEffect(() => {
+    if (sessionStore.viewer.is_leader) {
+      leaderStore.reset();
+    }
+  });
+
+  useEffect(() => {
+    tasksStore.reset();
     sessionStore.logout();
   });
   return <Navigate to="/login" replace={true} />;
