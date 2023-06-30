@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
 
-import { loginFormValidation, loginFormValues } from './config';
+import { loginFormValidation, loginFormConfig } from './config';
 import { TextField } from './text-field';
 import './login-form.scss';
 
@@ -14,7 +14,7 @@ const _LoginForm = () => {
   const apiError = sessionStore.getError;
   return (
     <Formik
-      initialValues={loginFormValues}
+      initialValues={loginFormConfig}
       validationSchema={loginFormValidation}
       onSubmit={({ login, password }) => {
         sessionStore.login({ login, password });

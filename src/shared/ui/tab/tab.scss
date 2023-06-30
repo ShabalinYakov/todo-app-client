@@ -1,0 +1,26 @@
+@use '../styles/vars/colors.scss' as *;
+
+.tab {
+  padding: 10px 40px;
+
+  cursor: pointer;
+
+  opacity: 0.6;
+
+  color: $text-color;
+  border: 0;
+  outline: 0;
+  background: $tab-bg;
+
+  font-size: 20px;
+
+  &_active {
+    opacity: 1;
+    border-bottom: 2px solid $tab-active-border;
+    background-color: $tab-active-bg;
+  }
+
+  &:hover {
+    background-color: $tab-hover;
+  }
+}

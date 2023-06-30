@@ -1,0 +1,10 @@
+.tasks-subordinates {
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    width: calc(25% - 15px);
+    margin-bottom: 15px;
+    margin-left: 10px;
+  }
+}
