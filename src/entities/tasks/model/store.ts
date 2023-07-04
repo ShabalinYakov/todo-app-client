@@ -80,11 +80,20 @@ export class TasksStore {
     try {
       const response = await tasksApi.updateStatus({ task_id, status });
       runInAction(() => {
-        this.tasksViewer.forEach((t) => {
-          if (t.id === task_id) {
-            t.status = response.name;
-          }
-        });
+        const findTask = this.tasksViewer.some((t) => t.id === task_id);
+        if (findTask) {
+          this.tasksViewer.forEach((t) => {
+            if (t.id === task_id) {
+              t.status = response.name;
+            }
+          });
+        } else {
+          this.tasksSubordinate.forEach((t) => {
+            if (t.id === task_id) {
+              t.status = response.name;
+            }
+          });
+        }
       });
     } catch (error) {
       console.log(error);
@@ -98,11 +107,20 @@ export class TasksStore {
     try {
       const response = await tasksApi.updateTitle({ task_id, title });
       runInAction(() => {
-        this.tasksViewer.forEach((task) => {
-          if (task.id === task_id) {
-            task.title = response.title;
-          }
-        });
+        const findTask = this.tasksViewer.some((t) => t.id === task_id);
+        if (findTask) {
+          this.tasksViewer.forEach((task) => {
+            if (task.id === task_id) {
+              task.title = response.title;
+            }
+          });
+        } else {
+          this.tasksSubordinate.forEach((task) => {
+            if (task.id === task_id) {
+              task.title = response.title;
+            }
+          });
+        }
       });
     } catch (error) {
       console.log(error);
@@ -116,11 +134,20 @@ export class TasksStore {
     try {
       const response = await tasksApi.updateDeadline({ task_id, deadline });
       runInAction(() => {
-        this.tasksViewer.forEach((task) => {
-          if (task.id === task_id) {
-            task.deadline = response.deadline;
-          }
-        });
+        const findTask = this.tasksViewer.some((t) => t.id === task_id);
+        if (findTask) {
+          this.tasksViewer.forEach((task) => {
+            if (task.id === task_id) {
+              task.deadline = response.deadline;
+            }
+          });
+        } else {
+          this.tasksSubordinate.forEach((task) => {
+            if (task.id === task_id) {
+              task.deadline = response.deadline;
+            }
+          });
+        }
       });
     } catch (error) {
       console.log(error);
@@ -134,11 +161,20 @@ export class TasksStore {
     try {
       const response = await tasksApi.updateDescription({ task_id, description });
       runInAction(() => {
-        this.tasksViewer.forEach((task) => {
-          if (task.id === task_id) {
-            task.description = response.description;
-          }
-        });
+        const findTask = this.tasksViewer.some((t) => t.id === task_id);
+        if (findTask) {
+          this.tasksViewer.forEach((task) => {
+            if (task.id === task_id) {
+              task.description = response.description;
+            }
+          });
+        } else {
+          this.tasksSubordinate.forEach((task) => {
+            if (task.id === task_id) {
+              task.description = response.description;
+            }
+          });
+        }
       });
     } catch (error) {
       console.log(error);
@@ -152,11 +188,20 @@ export class TasksStore {
     try {
       const response = await tasksApi.updatePriority({ task_id, priority });
       runInAction(() => {
-        this.tasksViewer.forEach((task) => {
-          if (task.id === task_id) {
-            task.priority = response.name;
-          }
-        });
+        const findTask = this.tasksViewer.some((t) => t.id === task_id);
+        if (findTask) {
+          this.tasksViewer.forEach((task) => {
+            if (task.id === task_id) {
+              task.priority = response.name;
+            }
+          });
+        } else {
+          this.tasksSubordinate.forEach((task) => {
+            if (task.id === task_id) {
+              task.priority = response.name;
+            }
+          });
+        }
       });
     } catch (error) {
       console.log(error);
