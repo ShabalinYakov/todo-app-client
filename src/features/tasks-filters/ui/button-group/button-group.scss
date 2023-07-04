@@ -1,9 +1,0 @@
-@use '/src/shared/ui/styles/vars/colors.scss' as *;
-
-.button-group {
-  display: flex;
-  overflow: hidden;
-
-  border-radius: 7px;
-  box-shadow: 0 2px 5px 0 $gray;
-}

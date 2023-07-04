@@ -1,3 +1,27 @@
-.test {
-  color: red;
+@font-face {
+  font-family: Inter;
+  src: url('shared/ui/fonts/inter-regular.woff2') format('woff2'),
+    url('shared/ui/fonts/inter-regular.woff') format('woff'),
+    url('shared/ui/fonts/inter-regular.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url('shared/ui/fonts/inter-medium.woff2') format('woff2'),
+    url('shared/ui/fonts/inter-medium.woff') format('woff'), url('shared/ui/fonts/inter-medium.ttf') format('truetype');
+
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url('shared/ui/fonts/inter-bold.woff2') format('woff2'), url('shared/ui/fonts/inter-bold.woff') format('woff'),
+    url('shared/ui/fonts/inter-bold.ttf') format('truetype');
+
+  font-weight: 700;
+  font-style: normal;
 }

@@ -15,7 +15,7 @@ const _Popup = ({ active, children, handleClose }: Props) => {
     <>
       <Portal active={active}>
         <OverlayPopup isOpened={active} onClose={handleClose}>
-          <MainPopup>{children}</MainPopup>
+          <MainPopup onClose={handleClose}>{children}</MainPopup>
         </OverlayPopup>
       </Portal>
     </>

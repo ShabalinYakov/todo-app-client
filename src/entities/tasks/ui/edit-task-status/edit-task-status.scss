@@ -1,0 +1,22 @@
+.form-status {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  &__message {
+    position: absolute;
+    bottom: 5px;
+    left: 100px;
+
+    font-size: 0.95rem;
+
+    &_success {
+      color: green;
+    }
+
+    &_error {
+      color: red;
+    }
+  }
+}

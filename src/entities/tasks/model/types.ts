@@ -58,3 +58,11 @@ export interface StatusPayload {
 export interface StatusResponse {
   name: string;
 }
+
+export interface ResponsiblePayload {
+  task_id: string;
+  responsible: string;
+}
+export interface ResponsibleResponse {
+  name: string;
+}

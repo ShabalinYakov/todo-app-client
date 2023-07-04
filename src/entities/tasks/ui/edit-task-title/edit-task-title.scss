@@ -1,0 +1,47 @@
+.form-title {
+  display: flex;
+
+  &__field {
+    position: relative;
+
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 500px;
+    min-height: 45px;
+
+    word-wrap: break-word;
+
+    border-bottom: 1px solid #0000004b;
+  }
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+
+    &:hover {
+      border-radius: 6px;
+      background-color: #c4bcbc3a;
+    }
+  }
+
+  &__message {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    font-size: 0.95rem;
+
+    &_success {
+      color: green;
+    }
+
+    &_error {
+      color: red;
+    }
+  }
+}
