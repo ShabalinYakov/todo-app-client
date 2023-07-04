@@ -1,0 +1,19 @@
+.task-creator {
+  display: flex;
+
+  &__field {
+    position: relative;
+
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 500px;
+    min-height: 45px;
+
+    word-wrap: break-word;
+
+    border-bottom: 1px solid #0000004b;
+  }
+}

@@ -7,9 +7,14 @@
     justify-content: center;
 
     box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 
-    padding: 36px;
     inset: 0;
+
+    @media (width >= 767.98px) {
+      padding: 36px;
+    }
   }
 
   &__overlay {

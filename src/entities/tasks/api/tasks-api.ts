@@ -8,12 +8,19 @@ import {
   DescriptionData,
   PriorityPayload,
   PriorityResponse,
+  ResponsiblePayload,
+  ResponsibleResponse,
 } from '../model/types';
 
 import { baseApi } from 'shared/api';
 
 const getTasks = async (): Promise<Task[]> => {
   const { data } = await baseApi.get('tasks');
+  return data;
+};
+
+const getTasksSubordinateById = async (id: string): Promise<Task[]> => {
+  const { data } = await baseApi.get(`/tasks/subordinate/${id}`);
   return data;
 };
 
@@ -47,6 +54,11 @@ const updateStatus = async (payload: StatusPayload): Promise<StatusResponse> => 
   return data;
 };
 
+const updateResponsibleTask = async (payload: ResponsiblePayload): Promise<ResponsibleResponse> => {
+  const { data } = await baseApi.patch('/tasks/responsible', payload);
+  return data;
+};
+
 export const tasksApi = {
   getTasks,
   createTask,
@@ -55,4 +67,6 @@ export const tasksApi = {
   updateDeadline,
   updatePriority,
   updateDescription,
+  updateResponsibleTask,
+  getTasksSubordinateById,
 };

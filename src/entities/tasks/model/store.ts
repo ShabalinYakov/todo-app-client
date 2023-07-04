@@ -1,12 +1,22 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import { DeadlineData, DescriptionData, PriorityPayload, StatusPayload, Task, TaskPayload, TitleData } from './types';
+import {
+  DeadlineData,
+  DescriptionData,
+  PriorityPayload,
+  ResponsiblePayload,
+  StatusPayload,
+  Task,
+  TaskPayload,
+  TitleData,
+} from './types';
 
 import { tasksApi } from '../api';
 
 export class TasksStore {
   isLoading = false;
   tasksViewer: Task[] = [];
+  tasksSubordinate: Task[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -33,12 +43,30 @@ export class TasksStore {
     }
   };
 
-  createTask = async (payload: TaskPayload) => {
+  loadTasksSubordinateById = async (id: string) => {
+    this.setLoading(true);
+    try {
+      const tasksSubordinates = await tasksApi.getTasksSubordinateById(id);
+      runInAction(() => {
+        this.tasksSubordinate = tasksSubordinates;
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setLoading(false);
+    }
+  };
+
+  createTask = async (viewerId: string, payload: TaskPayload) => {
     this.setLoading(true);
     try {
       const task = await tasksApi.createTask(payload);
       runInAction(() => {
-        this.tasksViewer.push(task);
+        if (viewerId === task.responsible.id) {
+          this.tasksViewer.push(task);
+        } else {
+          this.tasksSubordinate.push(task);
+        }
       });
     } catch (error) {
       console.log(error);
@@ -129,6 +157,37 @@ export class TasksStore {
             task.priority = response.name;
           }
         });
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setLoading(false);
+    }
+  };
+
+  updateResponsibleTask = async ({ task_id, responsible }: ResponsiblePayload) => {
+    this.setLoading(true);
+    try {
+      const response = await tasksApi.updateResponsibleTask({ task_id, responsible });
+      runInAction(() => {
+        const findTask = this.tasksViewer.some((t) => t.id === task_id);
+        if (findTask) {
+          this.tasksViewer.forEach((task) => {
+            if (task.id === task_id) {
+              task.responsible.name = response.name;
+              this.tasksSubordinate.push(task);
+            }
+          });
+          this.tasksViewer = this.tasksViewer.filter((t) => t.id !== task_id);
+          return;
+        }
+        this.tasksSubordinate.forEach((task) => {
+          if (task.id === task_id) {
+            task.responsible.name = response.name;
+            this.tasksViewer.push(task);
+          }
+        });
+        this.tasksSubordinate = this.tasksSubordinate.filter((t) => t.id !== task_id);
       });
     } catch (error) {
       console.log(error);

@@ -1,13 +1,12 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import { ResponsiblePayload, Subordinate, Task } from './types';
+import { Subordinate } from './types';
 
 import { leaderApi } from '../api';
 
 export class LeaderStore {
   isLoading = false;
   subordinates: Subordinate[] = [];
-  tasksSubordinate: Task[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -19,7 +18,6 @@ export class LeaderStore {
 
   reset() {
     this.subordinates = [];
-    this.tasksSubordinate = [];
   }
 
   loadSubordinates = async () => {
@@ -36,37 +34,4 @@ export class LeaderStore {
     }
   };
 
-  loadTasksSubordinateById = async (id: string) => {
-    this.setLoading(true);
-    try {
-      const tasksSubordinates = await leaderApi.getTasksSubordinateById(id);
-      runInAction(() => {
-        this.tasksSubordinate = tasksSubordinates;
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.setLoading(false);
-    }
-  };
-
-  updateResponsibleTask = async ({ task_id, responsible }: ResponsiblePayload) => {
-    this.setLoading(true);
-    try {
-      const response = await leaderApi.updateResponsibleTask({ task_id, responsible });
-      runInAction(() => {
-        runInAction(() => {
-          this.tasksSubordinate.forEach((task) => {
-            if (task.id === task_id) {
-              task.responsible.name = response.name;
-            }
-          });
-        });
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.setLoading(false);
-    }
-  };
 }

@@ -2,43 +2,41 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 
 import { DEFAULT_FILTER, getFilterById, getFiltersList } from './lib/config';
-import { Task, FilterConfig } from './model/types';
 import './tasks-filters.scss';
 
 import { useStore } from 'app';
 
-import { Tab, Tabs } from 'shared/ui';
-
-interface Props {
-  tasks: Task[];
-}
-
-const _TasksFilters = ({ tasks }: Props) => {
+const _TasksFilters = () => {
   const { filtersStore } = useStore();
-  const [active, setActive] = useState(DEFAULT_FILTER);
+  const [activeFilter, setActiveFilter] = useState<number>();
 
-  const onFilterClick = (config: FilterConfig, activeFilterId: number) => {
+  const onChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = Number(target.value);
+    const { config } = getFilterById(id);
     filtersStore.setFilterConfig(config);
-    setActive(activeFilterId);
+    setActiveFilter(id);
   };
 
   useEffect(() => {
-    filtersStore.reset();
-  }, [filtersStore]);
-
-  useEffect(() => {
-    filtersStore.setTasks(tasks);
-  });
+    setActiveFilter(DEFAULT_FILTER);
+    filtersStore.setFilterConfig('all');
+  }, [filtersStore.tasks, filtersStore]);
 
   return (
     <div className="tasks-filters">
-      <Tabs>
+      <select
+        className="tasks-filters__select"
+        value={activeFilter}
+        name="tasks-filters"
+        id="tasks-filters"
+        onChange={onChange}
+      >
         {getFiltersList().map(({ id, name }) => (
-          <div key={id} onClick={() => onFilterClick(getFilterById(id).config, id)}>
-            <Tab active={active === id} value={name} />
-          </div>
+          <option key={id} value={id}>
+            {name}
+          </option>
         ))}
-      </Tabs>
+      </select>
     </div>
   );
 };
