@@ -16,9 +16,8 @@ interface Props {
 }
 const _CreateTaskForm = ({ onClose }: Props) => {
   const { prioritiesStore, leaderStore, sessionStore, tasksStore } = useStore();
-  const {id: viewerId} = sessionStore.viewer
+  const { id: viewerId } = sessionStore.viewer;
   const responsibleList: Subordinate[] = [{ id: viewerId, name: 'Назначить себя' }];
-
 
   if (leaderStore) {
     leaderStore.subordinates.forEach((s) => responsibleList.push(s));
@@ -34,7 +33,7 @@ const _CreateTaskForm = ({ onClose }: Props) => {
       validationSchema={formValidation}
       onSubmit={async (values) => {
         try {
-          await tasksStore.createTask(viewerId,{ ...values });
+          await tasksStore.createTask(viewerId, { ...values });
           if (!tasksStore.isLoading) {
             onClose();
           }

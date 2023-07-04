@@ -33,5 +33,4 @@ export class LeaderStore {
       this.setLoading(false);
     }
   };
-
 }
