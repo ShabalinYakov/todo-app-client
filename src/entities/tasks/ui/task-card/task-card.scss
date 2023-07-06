@@ -1,0 +1,105 @@
+@use 'shared/ui/styles/vars.scss' as *;
+
+.task-card {
+  padding: 20px;
+
+  cursor: pointer;
+
+  border-radius: 5px;
+  background-color: $bg-task-card;
+
+  &__title {
+    overflow: hidden;
+
+    margin-bottom: 10px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    &_gray {
+      color: $gray;
+    }
+
+    &_green {
+      color: $green;
+    }
+
+    &_red {
+      color: $red;
+    }
+  }
+
+  &__detail {
+    display: flex;
+    flex-flow: column wrap;
+
+    margin: 0 auto;
+    margin-bottom: 5px;
+
+    font-size: 14px;
+
+    &__title {
+      color: $gray;
+
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    &__value {
+      font-size: 1.1rem;
+
+      &_high {
+        width: 33.333%;
+        padding: 0 5px;
+
+        text-align: center;
+
+        color: $high-priority-text;
+        border-radius: 5px;
+
+        background: $high-priority-bg;
+      }
+
+      &_medium {
+        width: 33.333%;
+        padding: 0 5px;
+
+        text-align: center;
+
+        color: $medium-priority-text;
+        border-radius: 5px;
+
+        background: $medium-priority-bg;
+      }
+
+      &_low {
+        width: 33.333%;
+        padding: 0 5px;
+
+        text-align: center;
+
+        color: $low-priority-text;
+        border-radius: 5px;
+
+        background: $low-priority-bg;
+      }
+    }
+  }
+
+  &__shadow {
+    &_gray {
+      box-shadow: 0 3px 5px $gray;
+    }
+
+    &_green {
+      box-shadow: 0 3px 5px $green;
+    }
+
+    &_red {
+      box-shadow: 0 3px 5px $red;
+    }
+  }
+}

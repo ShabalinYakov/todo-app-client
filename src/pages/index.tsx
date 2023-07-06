@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import { useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 
 import { LoginPage } from './login-page';
-import { TasksPage } from './tasks-page/tasks-page';
+import { TasksPage } from './tasks-page';
 
 import { Logout } from 'features/logout';
 
@@ -11,6 +11,7 @@ const _Routing = () => {
     { path: '/', element: <TasksPage /> },
     { path: '/login', element: <LoginPage /> },
     { path: '/logout', element: <Logout /> },
+    { path: '*', element: <Navigate to={'/login'} /> },
   ]);
   return elements;
 };

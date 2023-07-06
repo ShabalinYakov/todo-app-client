@@ -1,12 +1,16 @@
 import { observer } from 'mobx-react-lite';
+import { Helmet } from 'react-helmet';
 
-import { AuthRedirect } from 'features/auth-redirect';
-import { LoginForm } from 'features/login-form';
+import { AuthRedirect, LoginForm } from 'entities/session';
+
 import './login-page.scss';
 
 const _LoginPage = () => {
   return (
     <AuthRedirect>
+      <Helmet>
+        <title>Страница авторизации</title>
+      </Helmet>
       <div className="login-page">
         <h1>Авторизация</h1>
         <LoginForm />
